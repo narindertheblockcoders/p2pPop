@@ -222,6 +222,16 @@ export default function Direct() {
           const data4 = new Date(data3);
           data4.setMinutes(data3.getMinutes() + Number(item?.duration));
           console.log(data4, "data4");
+
+          const newDateWithdraw = new Date(data4);
+          const newDate = new Date();
+
+          // Get Unix timestamps (epoch time) in seconds
+          const timestamp1 = Math.floor(newDateWithdraw.getTime() / 1000); // Divide by 1000 to get seconds
+          const timestamp2 = Math.floor(newDate.getTime() / 1000);
+
+          console.log(timestamp1, timestamp2, "timestamps");
+
           const data = {
             stakingId: getStakingDetails[0]?.toString(),
             userId: getStakingDetails[1]?.toString(),
@@ -234,6 +244,8 @@ export default function Direct() {
             startDate: item?.startDate,
             withdrawDate: data4,
             roi: item?.rateOfInterest,
+            to: timestamp1,
+            from: timestamp2,
           };
           arr2.push(data);
         }
@@ -549,8 +561,8 @@ export default function Direct() {
                       >
                         <ul>
                           <li className="active">
-                            <Link href="/stakings" class="stake-a active">
-                              stacking
+                            <Link href="/staking" class="stake-a active">
+                              Staking
                             </Link>
                           </li>
                           {/* <li>
@@ -645,8 +657,7 @@ export default function Direct() {
                         <ul className="dots">
                           <li>
                             <Link href="/personalInfo" class="sett_a">
-                              Personal
-                              Information0x45d12b59b965880c9F8A38eFdBA3075631e70Caf
+                              Personal Information
                             </Link>
                           </li>
                           <li>
@@ -704,17 +715,17 @@ export default function Direct() {
               </Link>
               <span>Staking</span>
             </div>
-            <div class="stake-start" onClick={() => setShow(true)}>
+            {/* <div class="stake-start" onClick={() => setShow(true)}>
               Start staking{" "}
               <span>
                 <img src="/arrowLeft.png" />
               </span>
-            </div>
+            </div> */}
           </div>
           <div class="container-fluid">
             <div class="stacking-head">
               <h2>Staking</h2>
-              <div
+              {/* <div
                 class="stakeing-ha"
                 id="start-stake-id"
                 onClick={() => setShow(true)}
@@ -723,7 +734,7 @@ export default function Direct() {
                 <span>
                   <img src="/arrowLeft.png" />
                 </span>
-              </div>
+              </div> */}
 
               {/* <Link href={"https://quickswap.exchange/#/swap/v3?currency0=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&currency1=0x7bbf85d26b305a030916be29aa9d754ee0f8bf60&swapIndex=0"}>
               <h6
@@ -812,9 +823,9 @@ export default function Direct() {
                       <img src="/smartt.png" alt="" />
                       <h6>No Stakes are Live !</h6>
                       <p>Stake your tokens now and get high APY at low risk.</p>
-                      <a href="" class="king-a" onClick={() => setShow(true)}>
+                      {/* <a href="" class="king-a" onClick={() => setShow(true)}>
                         Start Staking <img src="img/right-arrows.png" alt="" />
-                      </a>
+                      </a> */}
                     </div>
                   ) : (
                     <div class="stacking-cards" id="stacking-cards1">
@@ -841,7 +852,7 @@ export default function Direct() {
                                       </span>
                                     </li>
                                     <li>
-                                      <span>Local Duration:</span>
+                                      <span>Locked Duration:</span>
                                       <span>{item?.duration}months</span>
                                     </li>
                                   </ul>
@@ -906,7 +917,7 @@ export default function Direct() {
                                               </span>
                                             </li>
                                             <li>
-                                              <span>Locl Duration:</span>
+                                              <span>Locked Duration:</span>
                                               <span>
                                                 {item?.duration} months
                                               </span>
@@ -917,7 +928,7 @@ export default function Direct() {
                                               <span className="linkhref">
                                                 <Link
                                                   target="_blank"
-                                                  href={`https://mumbai.polygonscan.com/address/${tokenAddress}`}
+                                                  href={`https://polygonscan.com/address/${tokenAddress}`}
                                                 >
                                                   {tokenAddress?.slice(0, 5) +
                                                     "****" +
@@ -928,7 +939,7 @@ export default function Direct() {
                                               <span className="linkhref">
                                                 <Link
                                                   target="_blank"
-                                                  href={`https://mumbai.polygonscan.com/address/${item?.contractAddress}`}
+                                                  href={`https://polygonscan.com/address/${item?.contractAddress}`}
                                                 >
                                                   {item?.contractAddress?.slice(
                                                     0,
@@ -955,7 +966,7 @@ export default function Direct() {
                               item?.startDate * 1000
                             ).toLocaleString() ? (
                               <div class="stake-card1">
-                                <div class="scard-head">UVX Staking</div>
+                                <div class="scard-head"></div>
                                 <p class="upcoming">Unlocked</p>
                                 <div class="scard-table">
                                   <ul>
@@ -970,7 +981,7 @@ export default function Direct() {
                                       </span>
                                     </li>
                                     <li>
-                                      <span>Local Duration:</span>
+                                      <span>Locked Duration:</span>
                                       <span>{item?.duration} months</span>
                                     </li>
                                   </ul>
@@ -1060,7 +1071,7 @@ export default function Direct() {
                                               <span className="linkhref">
                                                 <Link
                                                   target="_blank"
-                                                  href={`https://mumbai.polygonscan.com/address/${tokenAddress}`}
+                                                  href={`https://polygonscan.com/address/${tokenAddress}`}
                                                 >
                                                   {tokenAddress?.slice(0, 5) +
                                                     "****" +
@@ -1071,7 +1082,7 @@ export default function Direct() {
                                               <span className="linkhref">
                                                 <Link
                                                   target="_blank"
-                                                  href={`https://mumbai.polygonscan.com/address/${item?.contractAddress}`}
+                                                  href={`https://polygonscan.com/address/${item?.contractAddress}`}
                                                 >
                                                   {item?.contractAddress?.slice(
                                                     0,
@@ -1111,9 +1122,9 @@ export default function Direct() {
                       <img src="/smartt.png" alt="" />
                       <h6>No Stakes are Live !</h6>
                       <p>Stake your tokens now and get high APY at low risk.</p>
-                      <a href="" class="king-a" onClick={() => setShow(true)}>
+                      {/* <a href="" class="king-a" onClick={() => setShow(true)}>
                         Start Staking <img src="img/right-arrows.png" alt="" />
-                      </a>
+                      </a> */}
                     </div>
                   ) : (
                     <div class="stacking-cards">
@@ -1127,8 +1138,7 @@ export default function Direct() {
                         );
                         return (
                           <div class="stake-card1">
-                            {new Date().toLocaleString() >
-                            new Date(item.withdrawDate).toLocaleString() ? (
+                            {item.to > item.from ? (
                               <>
                                 <div class="scard-head"></div>
                                 <p class="going">On Going</p>
@@ -1174,25 +1184,25 @@ export default function Direct() {
                               </ul>
                             </div>
 
-                            {new Date().toLocaleString() <
+                            {/* {new Date().toLocaleString() <
                               new Date(item.withdrawDate).toLocaleString() && (
                               <>
                                 <div class="scard-timing">
                                   <ul>
                                     <li>
-                                      {/* <strong>{dash[id].days}</strong> */}
+                                      <strong>{dash[id].days}</strong>
                                       <span>Days</span>
                                     </li>
                                     <li>
-                                      {/* <strong>{dash[id].hours}</strong> */}
+                                      <strong>{dash[id].hours}</strong>
                                       <span>Hours</span>
                                     </li>
                                     <li>
-                                      {/* <strong>{dash[id].minutes}</strong> */}
+                                      <strong>{dash[id].minutes}</strong>
                                       <span>Min</span>
                                     </li>
                                     <li>
-                                      {/* <strong>{dash[id].seconds}</strong> */}
+                                      <strong>{dash[id].seconds}</strong>
                                       <span>Sec</span>
                                     </li>
                                   </ul>
@@ -1203,24 +1213,25 @@ export default function Direct() {
                                     (GMT)
                                   </p>
                                 </div>
-                              </>
+                              </> 
                             )}
-
+                         */}
                             <div>
-                              {new Date().toLocaleString() >
-                              new Date(item.withdrawDate).toLocaleString() ? (
+                              {item.to > item.from ? (
                                 <div class="scard-timing" id="claim-stack">
                                   <p>Claim will available on </p>
                                   {item.withdrawDate.toLocaleString()}
                                 </div>
                               ) : (
-                                <button
-                                  className="claim"
-                                  style={{ background: "transparent" }}
-                                  onClick={() => getId(item)}
-                                >
-                                  Claim
-                                </button>
+                                <div class="scard-timing" id="claim-stack">
+                                  <button
+                                    className="claim"
+                                    style={{ background: "transparent" }}
+                                    onClick={() => getId(item)}
+                                  >
+                                    Claim
+                                  </button>
+                                </div>
                               )}
                             </div>
 
@@ -1283,7 +1294,7 @@ export default function Direct() {
                                           <span className="linkhref">
                                             <Link
                                               target="_blank"
-                                              href={`https://mumbai.polygonscan.com/address/${tokenAddress}`}
+                                              href={`https://polygonscan.com/address/${tokenAddress}`}
                                             >
                                               {tokenAddress?.slice(0, 5) +
                                                 "****" +
@@ -1294,7 +1305,7 @@ export default function Direct() {
                                           <span className="linkhref">
                                             <Link
                                               target="_blank"
-                                              href={`https://mumbai.polygonscan.com/address/${item?.contractAddress}`}
+                                              href={`https://polygonscan.com/address/${item?.contractAddress}`}
                                             >
                                               {item?.contractAddress?.slice(
                                                 0,

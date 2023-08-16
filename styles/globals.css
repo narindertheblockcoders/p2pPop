@@ -4752,6 +4752,12 @@ margin: 5px auto;
 /*------------------- Wallet section ends ----------------------*/
 
 /*------------------- Settings section starts ----------------------*/
+#tfa-none{
+  display: none;
+}
+#tfa-success {
+  position:  relative !important;
+}
 .twofactor-content h6 {
   color: white;
   font-size: 16px;
@@ -5204,6 +5210,8 @@ margin: 5px auto;
   align-items: center;
   justify-content: center;
   margin-top: 3rem;
+  float: left;
+  width: 100%;
 }
 
 .qrscan span {

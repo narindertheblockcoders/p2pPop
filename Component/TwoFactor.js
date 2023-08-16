@@ -1077,7 +1077,7 @@ export default function TwoFactor() {
         centered
         className="otpModal"
       >
-        <section class="two-factors1 blurred-background">
+        <section class="two-factors1 blurred-background" id="tfa-success">
           <div class="container">
             <div class="twofactor-content">
               <div class="success-twofactor">
@@ -1206,7 +1206,7 @@ export default function TwoFactor() {
         centered
         className="otpModal"
       >
-        <section class="two-factors1">
+        <section class="two-factors1" id="tfa-success">
           <div class="container">
             <div class="twofactor-content">
               <div class="success-twofactor">
@@ -1233,7 +1233,7 @@ export default function TwoFactor() {
         </section>
       </Modal>
 
-      <div class="twofactor-content">
+      <div class="twofactor-content" id="tfa-none">
         <p>
           We have sent a code to your phone number. Please enter the code you
           received here.

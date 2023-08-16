@@ -225,7 +225,7 @@ export default function TwoFactor() {
               </p>
             </div>
 
-            <div class="twofactor-content">
+            <div class="twofactor-content" id="tfa-none">
               <p>
                 We have sent a code to your phone number. Please enter the code
                 you received here.
