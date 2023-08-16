@@ -3933,6 +3933,9 @@ margin: 5px auto;
 
 .stacking-cards #claim-stack {
   background: #1d2328;
+  color: white;
+  padding: 0 10px;
+  text-align: center
 }
 
 .stacking-cards #claim-stack .claim {
@@ -6284,13 +6287,17 @@ margin: 5px auto;
 #start-stake-id {
   color: white;
   border-radius: 5px;
-  padding: 10px 0 10px 0 !important;
+  padding: 10px  !important;
   text-align: center;
-  width: 15%;
+  width: 10%;
   border: 1px solid #777d852e;
+  white-space: nowrap;
+
 }
 
-
+#start-stake-id  img {
+  width: 100%;
+}
 
 @media (max-width: 4000px) {
   /*------------------ Index page section starts --------------*/
@@ -13227,4 +13234,112 @@ line-height: 28px;
 .linkhref a{
   color: white !important;
   text-decoration: none !important;
+}
+
+@media (max-width: 1650px) {
+  #start-stake-id {
+    color: white;
+    border-radius: 5px;
+    padding: 10px  !important;
+    text-align: center;
+    width: 12%;
+    border: 1px solid #777d852e;
+    white-space: nowrap;
+  
+  }
+  
+  #start-stake-id  img {
+    width: 100%;
+  }
+   
+}
+
+@media (max-width: 1450px) {
+  #start-stake-id {
+    color: white;
+    border-radius: 5px;
+    padding: 10px  !important;
+    text-align: center;
+    width: 14%;
+    border: 1px solid #777d852e;
+    white-space: nowrap;
+  
+  }
+  
+  #start-stake-id  img {
+    width: 100%;
+  }
+   
+}
+
+
+@media (max-width: 1290px) {
+  #start-stake-id {
+    color: white;
+    border-radius: 5px;
+    padding: 10px  !important;
+    text-align: center;
+    width: 15%;
+    border: 1px solid #777d852e;
+    white-space: nowrap;
+  
+  }
+  
+  #start-stake-id  img {
+    width: 100%;
+  }
+   
+}
+@media (max-width: 1199px) {
+  #start-stake-id {
+    color: white;
+    border-radius: 5px;
+    padding: 10px  !important;
+    text-align: center;
+    width: 18%;
+    border: 1px solid #777d852e;
+    white-space: nowrap;
+  
+  }
+  
+  #start-stake-id  img {
+    width: 100%;
+  }
+   
+}
+
+@media (max-width: 1090px) {
+  #start-stake-id {
+    color: white;
+    border-radius: 5px;
+    padding: 10px  !important;
+    text-align: center;
+    width: 20%;
+    border: 1px solid #777d852e;
+    white-space: nowrap;
+  
+  }
+  
+  #start-stake-id  img {
+    width: 100%;
+  }
+   
+}
+
+@media (max-width: 990px) {
+  #start-stake-id {
+    color: white;
+    border-radius: 5px;
+    padding: 10px  !important;
+    text-align: center;
+    width: 25% !important;
+    border: 1px solid #777d852e;
+    white-space: nowrap;
+  
+  }
+  
+  #start-stake-id  img {
+    width: 100%;
+  }
+   
 }

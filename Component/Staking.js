@@ -213,7 +213,7 @@ export default function Direct() {
           console.log("GETING SID", sId[i]);
           const getStakingDetails = await daiContract.getUserStakings(sId[i]);
           console.log(getStakingDetails, "to get data1 data");
-          const data1 = getStakingDetails[5]?.toString();
+          const data1 = getStakingDetails[4]?.toString();
           console.log(data1, "data1");
           const data2 = data1 * 1000;
           console.log(data2, "data2");
@@ -714,8 +714,15 @@ export default function Direct() {
           <div class="container-fluid">
             <div class="stacking-head">
               <h2>Staking</h2>
-              <div class="stakeing-ha" id="start-stake-id" onClick={() => setShow(true)}>
-              Start staking{" "}
+              <div
+                class="stakeing-ha"
+                id="start-stake-id"
+                onClick={() => setShow(true)}
+              >
+                Start staking{" "}
+                <span>
+                  <img src="/arrowLeft.png" />
+                </span>
               </div>
 
               {/* <Link href={"https://quickswap.exchange/#/swap/v3?currency0=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&currency1=0x7bbf85d26b305a030916be29aa9d754ee0f8bf60&swapIndex=0"}>
@@ -819,7 +826,7 @@ export default function Direct() {
                               item?.startDate * 1000
                             ).toLocaleString() ? (
                               <div class="stake-card1">
-                                <div class="scard-head">ABC Staking</div>
+                                <div class="scard-head"></div>
                                 <p class="live">Live</p>
                                 <div class="scard-table">
                                   <ul>
@@ -865,10 +872,10 @@ export default function Direct() {
                                   </div>
                                 </div>
                                 <div class="stak-min">
-                                  <p>
+                                  {/* <p>
                                     Min. {min} P2PBIT - Max. {max} P2PBIT Stakes
                                     are allowed per user total Data
-                                  </p>
+                                  </p> */}
                                 </div>
                                 <div class="scard-accordian">
                                   <div class="accordion" id="accordionExample">
@@ -1105,7 +1112,7 @@ export default function Direct() {
                       <h6>No Stakes are Live !</h6>
                       <p>Stake your tokens now and get high APY at low risk.</p>
                       <a href="" class="king-a" onClick={() => setShow(true)}>
-                        Start Stacking <img src="img/right-arrows.png" alt="" />
+                        Start Staking <img src="img/right-arrows.png" alt="" />
                       </a>
                     </div>
                   ) : (
@@ -1120,18 +1127,15 @@ export default function Direct() {
                         );
                         return (
                           <div class="stake-card1">
-                            {new Date().toLocaleString() <
-                              new Date(item.withdrawDate).toLocaleString() && (
+                            {new Date().toLocaleString() >
+                            new Date(item.withdrawDate).toLocaleString() ? (
                               <>
-                                <div class="scard-head">ABC staking</div>
+                                <div class="scard-head"></div>
                                 <p class="going">On Going</p>
                               </>
-                            )}
-
-                            {new Date().toLocaleString() >
-                              new Date(item.withdrawDate).toLocaleString() && (
+                            ) : (
                               <>
-                                <div class="scard-head">UVX stacking</div>
+                                <div class="scard-head"></div>
                                 <p class="unlocked">Unlocked</p>
                               </>
                             )}
@@ -1202,7 +1206,25 @@ export default function Direct() {
                               </>
                             )}
 
-                            {new Date().toLocaleString() >
+                            <div>
+                              {new Date().toLocaleString() >
+                              new Date(item.withdrawDate).toLocaleString() ? (
+                                <div class="scard-timing" id="claim-stack">
+                                  <p>Claim will available on </p>
+                                  {item.withdrawDate.toLocaleString()}
+                                </div>
+                              ) : (
+                                <button
+                                  className="claim"
+                                  style={{ background: "transparent" }}
+                                  onClick={() => getId(item)}
+                                >
+                                  Claim
+                                </button>
+                              )}
+                            </div>
+
+                            {/* {new Date().toLocaleString() >
                               new Date(item.withdrawDate).toLocaleString() && (
                               <>
                                 <div class="scard-timing" id="claim-stack">
@@ -1215,10 +1237,8 @@ export default function Direct() {
                                   </button>
                                 </div>
                               </>
-                            )}
-
+                            )} */}
                             {/* {tx && null} */}
-
                             <div class="scard-accordian">
                               <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
