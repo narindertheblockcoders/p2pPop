@@ -714,15 +714,8 @@ export default function Direct() {
           <div class="container-fluid">
             <div class="stacking-head">
               <h2>Staking</h2>
-              {/* <a class="stakeing-ha" onClick={() => setShow(true)}>
-                BuyP2pBIt{" "}
-                <img class="stakeing-ha" src="/arrowLeft.png" atl="" />
-              </a> */}
-              <div class="stake-start" onClick={() => setShow(true)}>
-                Start staking{" "}
-                <span>
-                  <img src="/arrowLeft.png" />
-                </span>
+              <div class="stakeing-ha" id="start-stake-id" onClick={() => setShow(true)}>
+              Start staking{" "}
               </div>
 
               {/* <Link href={"https://quickswap.exchange/#/swap/v3?currency0=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&currency1=0x7bbf85d26b305a030916be29aa9d754ee0f8bf60&swapIndex=0"}>

@@ -6281,7 +6281,14 @@ margin: 5px auto;
   /* cursor: pointer; */
 }
 
-
+#start-stake-id {
+  color: white;
+  border-radius: 5px;
+  padding: 10px 0 10px 0 !important;
+  text-align: center;
+  width: 15%;
+  border: 1px solid #777d852e;
+}
 
 
 
@@ -7838,6 +7845,9 @@ margin: 5px auto;
   .s-image img {
     width: 200px;
     height: 200px;
+  }
+  #start-stake-id{
+    width: 20% !important;
   }
 
   .s-image {
