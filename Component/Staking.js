@@ -710,7 +710,7 @@ export default function Direct() {
               </Link>
               <span>Staking</span>
             </div>
-            <div class="stake-start">
+            <div class="stake-start" onClick={()=>setShow(true)}>
               Start staking{" "}
               <span>
                 <img src="/arrowLeft.png" />
@@ -811,7 +811,7 @@ export default function Direct() {
                       <img src="/smartt.png" alt="" />
                       <h6>No Stakes are Live !</h6>
                       <p>Stake your tokens now and get high APY at low risk.</p>
-                      <a href="" class="king-a">
+                      <a href="" class="king-a" onClick={()=>setShow(true)}>
                         Start Staking <img src="img/right-arrows.png" alt="" />
                       </a>
                     </div>
@@ -1099,7 +1099,7 @@ export default function Direct() {
                       <img src="/smartt.png" alt="" />
                       <h6>No Stakes are Live !</h6>
                       <p>Stake your tokens now and get high APY at low risk.</p>
-                      <a href="" class="king-a">
+                      <a href="" class="king-a" onClick={()=>setShow(true)}>
                         Start Stacking <img src="img/right-arrows.png" alt="" />
                       </a>
                     </div>
