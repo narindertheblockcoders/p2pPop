@@ -9,7 +9,7 @@ import { useAccount, useDisconnect, useContractWrite } from "wagmi";
 import ContractInterface from "../createStaking.json";
 import ContractInterface1 from "../stakingApprove.json";
 import ContractInterface2 from "../stake&Withdraw.json";
-import tokenAbi from "../token-abi.json"
+import tokenAbi from "../token-abi.json";
 console.log(ContractInterface, "contract for create new staking");
 import { parseEther } from "viem";
 import { Modal, Button, Table, Tooltip } from "@nextui-org/react";
@@ -72,7 +72,7 @@ export default function Direct() {
   const { write: write } = useContractWrite({
     mode: "args",
     address: "0x7eD840eFE044A3DA8894c06783555596Ee65fF52",
-    
+
     abi: ContractInterface,
     functionName: "startNewStaking",
     overrides: {
@@ -107,7 +107,7 @@ export default function Direct() {
       let res = await axios.post("/api/getData");
       const response = res.data;
       console.log(response, "to get response from api");
-      console.log(res,"ressssdd")
+      console.log(res, "ressssdd");
       setAdded(added + 1);
       setTotalData(response?.data?.data?.data);
       const endDates = response?.data?.data?.data;
@@ -126,7 +126,7 @@ export default function Direct() {
     dataFetchedRef.current = true;
     getData();
   }, [added]);
-    useEffect(() => {
+  useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
     getData();
@@ -174,14 +174,14 @@ export default function Direct() {
         setOpen(false);
         return;
       }
-      if(tx.status == 0) {
-        setOpen(false)
+      if (tx.status == 0) {
+        setOpen(false);
         setShow2(true);
-        return; 
+        return;
       }
     },
   });
-  
+
   async function testFn(e) {
     e.preventDefault();
     setOpen(true);
@@ -201,14 +201,14 @@ export default function Direct() {
           item.contractAddress,
           ContractInterface2,
           provider
-          );
+        );
         getStakingId = await daiContract.getUserStakingIds(address);
         console.log(getStakingId.toString(), "to get id");
         const idToPass = getStakingId.toString();
         var sId = idToPass.split(",");
         console.log("SID", sId);
-        setOpen(true)
-     
+        setOpen(true);
+
         for (let i = 0; i < sId.length; i++) {
           console.log("GETING SID", sId[i]);
           const getStakingDetails = await daiContract.getUserStakings(sId[i]);
@@ -237,13 +237,12 @@ export default function Direct() {
           };
           arr2.push(data);
         }
-                
+
         setNewData(arr2);
-        setLength(arr2?.length)
-     setTimeout(() => {
-       setOpen(false)
-     }, 2000);
-   
+        setLength(arr2?.length);
+        setTimeout(() => {
+          setOpen(false);
+        }, 2000);
       } catch (error) {
         console.log("hello");
         setOpen(false);
@@ -252,8 +251,7 @@ export default function Direct() {
     });
   }
 
-  console.log(newData,'newData is here')
-
+  console.log(newData, "newData is here");
 
   async function getIdForStake(item) {
     console.log(roi, "roi");
@@ -289,7 +287,7 @@ export default function Direct() {
       if (tx.status == 1) {
         setOpen(false);
         setTx(true);
-        setShow3(true)
+        setShow3(true);
         return;
       }
       if (tx.status == 0) {
@@ -301,17 +299,16 @@ export default function Direct() {
   });
 
   async function getId(item) {
-    console.log(item?.stakingId,"stakingId")
+    console.log(item?.stakingId, "stakingId");
     console.log(item?.contractAddress, "to get the id to withdraw");
-      setStakeId(item?.stakingId)
-      setContractAddress(item?.contractAddress);
-      Withdraw();
+    setStakeId(item?.stakingId);
+    setContractAddress(item?.contractAddress);
+    Withdraw();
   }
-  
 
-  async function okSubmitHanlder(){
-    setShow3(false)
-    window.location.reload(false)
+  async function okSubmitHanlder() {
+    setShow3(false);
+    window.location.reload(false);
   }
 
   return (
@@ -552,10 +549,7 @@ export default function Direct() {
                       >
                         <ul>
                           <li className="active">
-                            <Link
-                              href="/stakings"
-                              class="stake-a active"
-                            >
+                            <Link href="/stakings" class="stake-a active">
                               stacking
                             </Link>
                           </li>
@@ -710,7 +704,7 @@ export default function Direct() {
               </Link>
               <span>Staking</span>
             </div>
-            <div class="stake-start" onClick={()=>setShow(true)}>
+            <div class="stake-start" onClick={() => setShow(true)}>
               Start staking{" "}
               <span>
                 <img src="/arrowLeft.png" />
@@ -720,9 +714,16 @@ export default function Direct() {
           <div class="container-fluid">
             <div class="stacking-head">
               <h2>Staking</h2>
-              <a class="stakeing-ha" onClick={()=>setShow(true)}>
-                BuyP2pBIt <img class="stakeing-ha" src="/arrowLeft.png" atl="" />
-              </a>
+              {/* <a class="stakeing-ha" onClick={() => setShow(true)}>
+                BuyP2pBIt{" "}
+                <img class="stakeing-ha" src="/arrowLeft.png" atl="" />
+              </a> */}
+              <div class="stake-start" onClick={() => setShow(true)}>
+                Start staking{" "}
+                <span>
+                  <img src="/arrowLeft.png" />
+                </span>
+              </div>
 
               {/* <Link href={"https://quickswap.exchange/#/swap/v3?currency0=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&currency1=0x7bbf85d26b305a030916be29aa9d754ee0f8bf60&swapIndex=0"}>
               <h6
@@ -811,7 +812,7 @@ export default function Direct() {
                       <img src="/smartt.png" alt="" />
                       <h6>No Stakes are Live !</h6>
                       <p>Stake your tokens now and get high APY at low risk.</p>
-                      <a href="" class="king-a" onClick={()=>setShow(true)}>
+                      <a href="" class="king-a" onClick={() => setShow(true)}>
                         Start Staking <img src="img/right-arrows.png" alt="" />
                       </a>
                     </div>
@@ -820,124 +821,134 @@ export default function Direct() {
                       {totalData?.map((item, id) => {
                         return (
                           <>
-                          {new Date().toLocaleString()>= new Date(item?.startDate*1000).toLocaleString() ?
-                          <div class="stake-card1">
-                          <div class="scard-head">ABC Staking</div>
-                          <p class="live">Live</p>
-                          <div class="scard-table">
-                            <ul>
-                              <li>
-                                <span>APR:</span>
-                                <span>
-                                  {item?.rateOfInterest}%{" "}
-                                  <img src="img/calculator@2x.png" alt="" />
-                                </span>
-                              </li>
-                              <li>
-                                <span>Local Duration:</span>
-                                <span>{item?.duration}months</span>
-                              </li>
-                            </ul>
-                          </div>
+                            {new Date().toLocaleString() >=
+                            new Date(
+                              item?.startDate * 1000
+                            ).toLocaleString() ? (
+                              <div class="stake-card1">
+                                <div class="scard-head">ABC Staking</div>
+                                <p class="live">Live</p>
+                                <div class="scard-table">
+                                  <ul>
+                                    <li>
+                                      <span>APR:</span>
+                                      <span>
+                                        {item?.rateOfInterest}%{" "}
+                                        <img
+                                          src="img/calculator@2x.png"
+                                          alt=""
+                                        />
+                                      </span>
+                                    </li>
+                                    <li>
+                                      <span>Local Duration:</span>
+                                      <span>{item?.duration}months</span>
+                                    </li>
+                                  </ul>
+                                </div>
 
-                          <div class="stake-stake">
-                            <div class="input-group mb-3">
-                              <input
-                                // style={{color:"white"}}
-                                type="text"
-                                class="form-control"
-                                placeholder="0.0"
-                                aria-label="Recipient's username"
-                                aria-describedby="basic-addon2"
-                                onChange={(e) => setAmount(e.target.value)}
-                              />
+                                <div class="stake-stake">
+                                  <div class="input-group mb-3">
+                                    <input
+                                      // style={{color:"white"}}
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="0.0"
+                                      aria-label="Recipient's username"
+                                      aria-describedby="basic-addon2"
+                                      onChange={(e) =>
+                                        setAmount(e.target.value)
+                                      }
+                                    />
 
-                              <span
-                                style={{ cursor: "pointer" }}
-                                class="input-group-text"
-                                id="basic-addon2"
-                                onClick={() => getIdForStake(item)}
-                              >
-                                Stake
-                              </span>
-                            </div>
-                          </div>
-                          <div class="stak-min">
-                            <p>
-                              Min. {min} P2PBIT - Max. {max} P2PBIT Stakes
-                              are allowed per user total Data
-                            </p>
-                          </div>
-                          <div class="scard-accordian">
-                            <div class="accordion" id="accordionExample">
-                              <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                  <button
-                                    class="accordion-button more-details"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapsetwo"
-                                    aria-expanded="true"
-                                    aria-controls="collapsetwo"
-                                  >
-                                    <span>More Details</span>
-                                  </button>
-                                </h2>
-                                <div
-                                  id="collapsetwo"
-                                  class="accordion-collapse collapse show"
-                                  data-bs-parent="#accordionExample"
-                                >
-                                  <div class="accordion-body">
-                                    <ul>
-                                      <li>
-                                        <span>APR:</span>
-                                        <span>{item?.rateOfInterest}%</span>
-                                      </li>
-                                      <li>
-                                        <span>Locl Duration:</span>
-                                        <span>{item?.duration} months</span>
-                                      </li>
-                                    </ul>
-                                    <ul class="stacking-contract">
-                                      <li>
-                                        <span className="linkhref">
-                                          <Link
-                                            target="_blank"
-                                            href={`https://mumbai.polygonscan.com/address/${tokenAddress}`}
-                                          >
-                                            {tokenAddress?.slice(0, 5) +
-                                              "****" +
-                                              tokenAddress?.slice(-5)}
-                                          </Link>
-                                        </span>
+                                    <span
+                                      style={{ cursor: "pointer" }}
+                                      class="input-group-text"
+                                      id="basic-addon2"
+                                      onClick={() => getIdForStake(item)}
+                                    >
+                                      Stake
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="stak-min">
+                                  <p>
+                                    Min. {min} P2PBIT - Max. {max} P2PBIT Stakes
+                                    are allowed per user total Data
+                                  </p>
+                                </div>
+                                <div class="scard-accordian">
+                                  <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                        <button
+                                          class="accordion-button more-details"
+                                          type="button"
+                                          data-bs-toggle="collapse"
+                                          data-bs-target="#collapsetwo"
+                                          aria-expanded="true"
+                                          aria-controls="collapsetwo"
+                                        >
+                                          <span>More Details</span>
+                                        </button>
+                                      </h2>
+                                      <div
+                                        id="collapsetwo"
+                                        class="accordion-collapse collapse show"
+                                        data-bs-parent="#accordionExample"
+                                      >
+                                        <div class="accordion-body">
+                                          <ul>
+                                            <li>
+                                              <span>APR:</span>
+                                              <span>
+                                                {item?.rateOfInterest}%
+                                              </span>
+                                            </li>
+                                            <li>
+                                              <span>Locl Duration:</span>
+                                              <span>
+                                                {item?.duration} months
+                                              </span>
+                                            </li>
+                                          </ul>
+                                          <ul class="stacking-contract">
+                                            <li>
+                                              <span className="linkhref">
+                                                <Link
+                                                  target="_blank"
+                                                  href={`https://mumbai.polygonscan.com/address/${tokenAddress}`}
+                                                >
+                                                  {tokenAddress?.slice(0, 5) +
+                                                    "****" +
+                                                    tokenAddress?.slice(-5)}
+                                                </Link>
+                                              </span>
 
-                                        <span className="linkhref">
-                                          <Link
-                                            target="_blank"
-                                            href={`https://mumbai.polygonscan.com/address/${item?.contractAddress}`}
-                                          >
-                                            {item?.contractAddress?.slice(
-                                              0,
-                                              5
-                                            ) +
-                                              "****" +
-                                              item?.contractAddress?.slice(
-                                                -5
-                                              )}
-                                          </Link>
-                                        </span>
-                                      </li>
-                                    </ul>
+                                              <span className="linkhref">
+                                                <Link
+                                                  target="_blank"
+                                                  href={`https://mumbai.polygonscan.com/address/${item?.contractAddress}`}
+                                                >
+                                                  {item?.contractAddress?.slice(
+                                                    0,
+                                                    5
+                                                  ) +
+                                                    "****" +
+                                                    item?.contractAddress?.slice(
+                                                      -5
+                                                    )}
+                                                </Link>
+                                              </span>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                        :null}
-                            
-
+                            ) : null}
 
                             {new Date().toLocaleString() <
                             new Date(
@@ -1039,7 +1050,8 @@ export default function Direct() {
                                               <span>
                                                 {new Date(
                                                   item?.endDate * 1000
-                                                )?.toLocaleString()}{" "}(GMT)
+                                                )?.toLocaleString()}{" "}
+                                                (GMT)
                                               </span>
                                             </li>
                                           </ul>
@@ -1099,15 +1111,20 @@ export default function Direct() {
                       <img src="/smartt.png" alt="" />
                       <h6>No Stakes are Live !</h6>
                       <p>Stake your tokens now and get high APY at low risk.</p>
-                      <a href="" class="king-a" onClick={()=>setShow(true)}>
+                      <a href="" class="king-a" onClick={() => setShow(true)}>
                         Start Stacking <img src="img/right-arrows.png" alt="" />
                       </a>
                     </div>
                   ) : (
                     <div class="stacking-cards">
-                    
                       {newData?.map((item, id) => {
-                       console.log(Number(ethers.utils.formatEther(item?.totalTokens)) + Number(ethers.utils.formatEther(item?.rateOfInterest)),"ii")
+                        console.log(
+                          Number(ethers.utils.formatEther(item?.totalTokens)) +
+                            Number(
+                              ethers.utils.formatEther(item?.rateOfInterest)
+                            ),
+                          "ii"
+                        );
                         return (
                           <div class="stake-card1">
                             {new Date().toLocaleString() <
@@ -1131,19 +1148,25 @@ export default function Direct() {
                                 <li>
                                   <span>Ultimate Value:</span>
                                   <span>
-                                   
-                                    {
-                                      Number(ethers.utils.formatEther(
+                                    {Number(
+                                      ethers.utils.formatEther(
                                         item?.totalTokens
                                       )
-                                    ) + Number(ethers.utils.formatEther(item?.rateOfInterest)) }
+                                    ) +
+                                      Number(
+                                        ethers.utils.formatEther(
+                                          item?.rateOfInterest
+                                        )
+                                      )}
                                   </span>
                                 </li>
                                 <li>
                                   <span>Staked Tokens:</span>
                                   <span>
-                                    {Math.floor(ethers.utils.formatEther(
-                                      item?.totalTokens)
+                                    {Math.floor(
+                                      ethers.utils.formatEther(
+                                        item?.totalTokens
+                                      )
                                     )}
                                   </span>
                                 </li>
@@ -1394,53 +1417,53 @@ export default function Direct() {
                   </svg>
                 </Link>
               </li>
-           <li class="active">
-             <Link href="/staking">
-               <svg
-                 xmlns="http://www.w3.org/2000/svg"
-                 width="22.772"
-                 height="25.148"
-                 viewBox="0 0 22.772 25.148"
-               >
-                 <g
-                   id="Group_17235"
-                   data-name="Group 17235"
-                   transform="translate(-1275.37 2278.598)"
-                 >
-                   <path
-                     id="Path_10922"
-                     data-name="Path 10922"
-                     d="M85.45,21.143c.133.826.263,1.635.4,2.473.488,0,.967.008,1.445-.008.064,0,.15-.1.182-.169.713-1.6,1.433-3.205,2.118-4.822a2.172,2.172,0,0,1,.9-1.062,6.342,6.342,0,0,0,1.735-1.382,4.873,4.873,0,0,0,.946-1.886,3.757,3.757,0,0,0,.067-.832c.008-.609,0-1.217,0-1.849-.157-.011-.3-.016-.446-.033a2.213,2.213,0,0,1-1.57-.937A3.6,3.6,0,0,0,89.41,9.222c-.342-.105-.428-.385-.252-.738.389-.779.785-1.556,1.177-2.334.047-.093.089-.188.173-.368-.334.033-.612.053-.889.087-.109.014-.214.069-.323.08a.418.418,0,0,1-.482-.34.415.415,0,0,1,.239-.527,3,3,0,0,1,2.3.016c.262.107.311.4.151.72Q90.912,7,90.312,8.177c-.05.1-.1.2-.156.328.107.061.2.118.3.172a4.436,4.436,0,0,1,1.414,1.329,1.52,1.52,0,0,0,1.6.627c.48-.074.665.093.666.61,0,.7-.032,1.4.007,2.091a5,5,0,0,1-1.046,3.2,5.956,5.956,0,0,1-1.972,1.709,1.8,1.8,0,0,0-.791.917c-.712,1.689-1.465,3.359-2.2,5.039a.532.532,0,0,1-.545.356c-.658-.009-1.314,0-1.972,0-.394,0-.528-.125-.593-.53-.137-.857-.276-1.714-.419-2.6a9.689,9.689,0,0,1-4.69,0c-.094.568-.187,1.128-.28,1.688-.053.324-.1.648-.16.971-.062.346-.2.471-.522.472-.695,0-1.388,0-2.083,0a.51.51,0,0,1-.481-.279,58.18,58.18,0,0,1-3.518-6.907,7.834,7.834,0,0,1-.091-5.716c.036-.1.072-.2.113-.312-.166-.107-.336-.2-.491-.32a2.259,2.259,0,0,1-.982-2.351A2.205,2.205,0,0,1,73.18,6.914a2.106,2.106,0,0,1,.526-.024.449.449,0,0,1,.422.479.46.46,0,0,1-.433.444,2.665,2.665,0,0,0-.493.053,1.281,1.281,0,0,0-.55,2.151,5.873,5.873,0,0,0,.638.5A9.043,9.043,0,0,1,76.284,7.77a.449.449,0,0,1,.678.12c.146.256.056.5-.25.69-.032.02-.067.035-.1.058-.577.449-1.184.863-1.723,1.359a5.631,5.631,0,0,0-1.7,3.91,7.3,7.3,0,0,0,.685,3.57c.918,2.053,1.973,4.027,3.082,5.97.041.072.128.159.2.161.49.014.979.008,1.488.008.108-.664.218-1.31.319-1.958.08-.516.076-.516-.37-.76a2.251,2.251,0,0,1-.242-.142.465.465,0,0,1-.144-.634.415.415,0,0,1,.581-.164,6.868,6.868,0,0,0,3.814.8,6.194,6.194,0,0,0,3.068-.781.426.426,0,0,1,.628.152.471.471,0,0,1-.205.66c-.2.12-.408.226-.638.353"
-                     transform="translate(1204 -2278)"
-                     fill="#fff"
-                   />
-                   <path
-                     id="Path_10923"
-                     data-name="Path 10923"
-                     d="M78.288,10.318a5.5,5.5,0,1,1,6.947,0c.284.117.57.221.84.352a.451.451,0,0,1-.365.824,9.818,9.818,0,0,0-3.916-.655,11.6,11.6,0,0,0-3.142.348c-.283.077-.556.194-.833.3a.456.456,0,0,1-.608-.206.442.442,0,0,1,.234-.618c.272-.129.557-.23.843-.345M81.74,1.451c-.2.02-.4.036-.6.062a4.563,4.563,0,0,0-1.73,8.453.648.648,0,0,0,.373.082,18.1,18.1,0,0,1,3.88-.006.831.831,0,0,0,.476-.112,4.58,4.58,0,0,0-2.4-8.478"
-                     transform="translate(1204.797 -2279.048)"
-                     fill="#fff"
-                     stroke="#1d2025"
-                     stroke-width="0.2"
-                   />
-                   <path
-                     id="Path_10924"
-                     data-name="Path 10924"
-                     d="M86.257,10.18a.369.369,0,1,1-.365.372.371.371,0,0,1,.365-.372"
-                     transform="translate(1207.022 -2276)"
-                     fill="#fff"
-                   />
-                   <path
-                     id="Path_10925"
-                     data-name="Path 10925"
-                     d="M83.514,3.9a1.42,1.42,0,0,0-.74-.738,1.31,1.31,0,0,0-.54-.112H79.4V6.366h-.413v.609H79.4v.572h1.187V6.975h.453V6.366h-.453V4.178A.249.249,0,0,1,80.66,4a.227.227,0,0,1,.174-.073h1.111a.512.512,0,1,1,0,1.024h-.329a.371.371,0,0,0-.187.035.5.5,0,0,0-.13.159l-.357.7h1.294a1.31,1.31,0,0,0,.54-.112,1.407,1.407,0,0,0,.74-.743,1.351,1.351,0,0,0,.11-.546,1.315,1.315,0,0,0-.11-.541"
-                     transform="translate(1205.448 -2278.302)"
-                     fill="#fff"
-                   />
-                 </g>
-               </svg>
-             </Link>
-           </li>
+              <li class="active">
+                <Link href="/staking">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22.772"
+                    height="25.148"
+                    viewBox="0 0 22.772 25.148"
+                  >
+                    <g
+                      id="Group_17235"
+                      data-name="Group 17235"
+                      transform="translate(-1275.37 2278.598)"
+                    >
+                      <path
+                        id="Path_10922"
+                        data-name="Path 10922"
+                        d="M85.45,21.143c.133.826.263,1.635.4,2.473.488,0,.967.008,1.445-.008.064,0,.15-.1.182-.169.713-1.6,1.433-3.205,2.118-4.822a2.172,2.172,0,0,1,.9-1.062,6.342,6.342,0,0,0,1.735-1.382,4.873,4.873,0,0,0,.946-1.886,3.757,3.757,0,0,0,.067-.832c.008-.609,0-1.217,0-1.849-.157-.011-.3-.016-.446-.033a2.213,2.213,0,0,1-1.57-.937A3.6,3.6,0,0,0,89.41,9.222c-.342-.105-.428-.385-.252-.738.389-.779.785-1.556,1.177-2.334.047-.093.089-.188.173-.368-.334.033-.612.053-.889.087-.109.014-.214.069-.323.08a.418.418,0,0,1-.482-.34.415.415,0,0,1,.239-.527,3,3,0,0,1,2.3.016c.262.107.311.4.151.72Q90.912,7,90.312,8.177c-.05.1-.1.2-.156.328.107.061.2.118.3.172a4.436,4.436,0,0,1,1.414,1.329,1.52,1.52,0,0,0,1.6.627c.48-.074.665.093.666.61,0,.7-.032,1.4.007,2.091a5,5,0,0,1-1.046,3.2,5.956,5.956,0,0,1-1.972,1.709,1.8,1.8,0,0,0-.791.917c-.712,1.689-1.465,3.359-2.2,5.039a.532.532,0,0,1-.545.356c-.658-.009-1.314,0-1.972,0-.394,0-.528-.125-.593-.53-.137-.857-.276-1.714-.419-2.6a9.689,9.689,0,0,1-4.69,0c-.094.568-.187,1.128-.28,1.688-.053.324-.1.648-.16.971-.062.346-.2.471-.522.472-.695,0-1.388,0-2.083,0a.51.51,0,0,1-.481-.279,58.18,58.18,0,0,1-3.518-6.907,7.834,7.834,0,0,1-.091-5.716c.036-.1.072-.2.113-.312-.166-.107-.336-.2-.491-.32a2.259,2.259,0,0,1-.982-2.351A2.205,2.205,0,0,1,73.18,6.914a2.106,2.106,0,0,1,.526-.024.449.449,0,0,1,.422.479.46.46,0,0,1-.433.444,2.665,2.665,0,0,0-.493.053,1.281,1.281,0,0,0-.55,2.151,5.873,5.873,0,0,0,.638.5A9.043,9.043,0,0,1,76.284,7.77a.449.449,0,0,1,.678.12c.146.256.056.5-.25.69-.032.02-.067.035-.1.058-.577.449-1.184.863-1.723,1.359a5.631,5.631,0,0,0-1.7,3.91,7.3,7.3,0,0,0,.685,3.57c.918,2.053,1.973,4.027,3.082,5.97.041.072.128.159.2.161.49.014.979.008,1.488.008.108-.664.218-1.31.319-1.958.08-.516.076-.516-.37-.76a2.251,2.251,0,0,1-.242-.142.465.465,0,0,1-.144-.634.415.415,0,0,1,.581-.164,6.868,6.868,0,0,0,3.814.8,6.194,6.194,0,0,0,3.068-.781.426.426,0,0,1,.628.152.471.471,0,0,1-.205.66c-.2.12-.408.226-.638.353"
+                        transform="translate(1204 -2278)"
+                        fill="#fff"
+                      />
+                      <path
+                        id="Path_10923"
+                        data-name="Path 10923"
+                        d="M78.288,10.318a5.5,5.5,0,1,1,6.947,0c.284.117.57.221.84.352a.451.451,0,0,1-.365.824,9.818,9.818,0,0,0-3.916-.655,11.6,11.6,0,0,0-3.142.348c-.283.077-.556.194-.833.3a.456.456,0,0,1-.608-.206.442.442,0,0,1,.234-.618c.272-.129.557-.23.843-.345M81.74,1.451c-.2.02-.4.036-.6.062a4.563,4.563,0,0,0-1.73,8.453.648.648,0,0,0,.373.082,18.1,18.1,0,0,1,3.88-.006.831.831,0,0,0,.476-.112,4.58,4.58,0,0,0-2.4-8.478"
+                        transform="translate(1204.797 -2279.048)"
+                        fill="#fff"
+                        stroke="#1d2025"
+                        stroke-width="0.2"
+                      />
+                      <path
+                        id="Path_10924"
+                        data-name="Path 10924"
+                        d="M86.257,10.18a.369.369,0,1,1-.365.372.371.371,0,0,1,.365-.372"
+                        transform="translate(1207.022 -2276)"
+                        fill="#fff"
+                      />
+                      <path
+                        id="Path_10925"
+                        data-name="Path 10925"
+                        d="M83.514,3.9a1.42,1.42,0,0,0-.74-.738,1.31,1.31,0,0,0-.54-.112H79.4V6.366h-.413v.609H79.4v.572h1.187V6.975h.453V6.366h-.453V4.178A.249.249,0,0,1,80.66,4a.227.227,0,0,1,.174-.073h1.111a.512.512,0,1,1,0,1.024h-.329a.371.371,0,0,0-.187.035.5.5,0,0,0-.13.159l-.357.7h1.294a1.31,1.31,0,0,0,.54-.112,1.407,1.407,0,0,0,.74-.743,1.351,1.351,0,0,0,.11-.546,1.315,1.315,0,0,0-.11-.541"
+                        transform="translate(1205.448 -2278.302)"
+                        fill="#fff"
+                      />
+                    </g>
+                  </svg>
+                </Link>
+              </li>
               {/* <li>
              <Link href="/ewallet">
                <svg
@@ -1692,7 +1715,7 @@ export default function Direct() {
       >
         <Modal.Body>
           <h3 style={{ textAlign: "center" }}>
-          You cannot stake more than max stake of user
+            You cannot stake more than max stake of user
           </h3>
         </Modal.Body>
         <Modal.Footer>
@@ -1715,9 +1738,7 @@ export default function Direct() {
         className="staking-modal"
       >
         <Modal.Body>
-          <h3 style={{ textAlign: "center" }}>
-          Withdraw Successfully
-          </h3>
+          <h3 style={{ textAlign: "center" }}>Withdraw Successfully</h3>
         </Modal.Body>
         <Modal.Footer>
           <Button
