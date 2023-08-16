@@ -71,7 +71,7 @@ export default function Direct() {
 
   const { write: write } = useContractWrite({
     mode: "args",
-    address: "0x88eA70B6e6FE05530614D6B658388c89Ef73934E",
+    address: "0x7eD840eFE044A3DA8894c06783555596Ee65fF52",
     
     abi: ContractInterface,
     functionName: "startNewStaking",
