@@ -71,7 +71,7 @@ export default function Direct() {
 
   const { write: write } = useContractWrite({
     mode: "args",
-    address: "0x7eD840eFE044A3DA8894c06783555596Ee65fF52",
+    address: "0x4114A40EB76a059eADb157fD9C80F5e85C0b484B",
 
     abi: ContractInterface,
     functionName: "startNewStaking",
@@ -847,7 +847,7 @@ export default function Direct() {
                                   </ul>
                                 </div>
 
-                                <div class="stake-stake">
+                                <div class="stake-stake mb-2">
                                   <div class="input-group mb-3">
                                     <input
                                       // style={{color:"white"}}
