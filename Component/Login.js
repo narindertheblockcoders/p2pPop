@@ -20,7 +20,7 @@ import { ethers } from "ethers";
 let signer; // Declare signer variable
 
 function Login() {
-  console.log("double")
+  console.log("double");
   // const dataFetchedRef = useRef(false);
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -36,6 +36,7 @@ function Login() {
   const [key, setKey] = useState();
   const [open, setOpen] = useState(false);
   const [tx, setTx] = useState(false);
+  const [oneTimeMessage, setOnwTimeMessage] = useState();
 
   const [code1, setCode1] = useState();
   const [code2, setCode2] = useState();
@@ -54,6 +55,7 @@ function Login() {
   const [lengthError, setLengthError] = useState(false);
   const [faStatus, setFaStatus] = useState();
   const [show02, setShow02] = useState(false);
+  const dataFetchedRef = useRef(false);
 
   const { disconnect } = useDisconnect({
     onSuccess(data) {},
@@ -74,20 +76,22 @@ function Login() {
     }
     const hash = ethers.utils.hashMessage(ethers.utils.toUtf8Bytes(message));
     const signature = await signer.signMessage(hash); // Use the signer variable to sign the message
-    console.log(signature, "signature");
-    if(signature){
-      formSubmitHandler()
-    }else{
+    console.log(signature, "signature1");
+    if (signature) {
+      formSubmitHandler();
+    } else {
       setShow04(true);
+      console.log("first111");
     }
-    
   };
 
   const handleSignMessage = async () => {
     try {
+      console.log("signation sign Message");
       const message = "Hello, World!";
+      setOnwTimeMessage(message);
       await signMessage(message); // Call the signMessage function
-      await formSubmitHandler();
+      // await formSubmitHandler();
       return;
     } catch (error) {
       console.error("Error signing message:", error);
@@ -113,7 +117,7 @@ function Login() {
   async function verifySubmitHandler(fullCode) {
     setOpen(true);
     console.log(address, "to send to api");
-    console.log(fullCode,"fullCode")
+    console.log(fullCode, "fullCode");
     const data = {
       otp: fullCode,
       address: address,
@@ -185,7 +189,7 @@ function Login() {
   function handleChangeFn5(e) {
     setCode5(e.target.value);
     num6.current.focus();
-    
+
     const fullCode = `${code1}${code2}${code3}${code4}${e.target.value}${code6}`;
     if (e.target.value != NaN) {
       setCodeError(false);
@@ -200,7 +204,7 @@ function Login() {
 
   function handleChangeFn6(e) {
     setCode6(e.target.value);
-    num6.current.blur()
+    num6.current.blur();
     const fullCode = `${code1}${code2}${code3}${code4}${code5}${e.target.value}`;
     if (e.target.value != NaN) {
       setCodeError(false);
@@ -212,8 +216,6 @@ function Login() {
       setLengthError(true);
     }
   }
-
-
 
   async function read() {
     if (
@@ -241,17 +243,19 @@ function Login() {
   }, []);
 
   useEffect(() => {
+    console.log(address, "addres is here");
+    // if (dataFetchedRef.current) return;
+    // dataFetchedRef.current = true;
 
     setTimeout(() => {
       try {
         if (address) {
+          console.log(address, "signation addreesss");
           localStorage.setItem("address", address);
           handleSignMessage();
           return;
         }
-       
       } catch (err) {}
-      
     }, 100);
   }, [address, faStatus]);
 
@@ -264,6 +268,10 @@ function Login() {
   }
 
   async function walletCheck(data) {
+    // if (dataFetchedRef.current) return;
+    // dataFetchedRef.current = true;
+
+    console.log(data, "data send for walletCheck");
     setOpen(true);
     try {
       let res = await axios.post("/api/login/walletCheck", data);
@@ -285,7 +293,11 @@ function Login() {
       const message = response.data.message;
       setMessage(response.data.message);
 
-      if (response.data.data.id && response.data.data.key && response.data.data.proof ) {
+      if (
+        response.data.data.id &&
+        response.data.data.key &&
+        response.data.data.proof
+      ) {
         setOpen(true);
         router.push("/swapping1");
         return;
@@ -332,6 +344,7 @@ function Login() {
       setOpen(false);
     }
   }
+
   async function formSubmitHandler() {
     if (!address) {
       return;
@@ -340,21 +353,28 @@ function Login() {
       address: address,
     };
 
+    console.log(data, "data check for use");
+
     walletCheck(data);
   }
 
   async function onBoarding(data) {
     try {
       let res = await axios.post("/api/addOnBoarding", data);
+      console.log(res);
       const response = res.data;
-      console.log(response.data,"addOnBoarding")
-    } catch (err) {}
+      console.log(response.data, "addOnBoarding");
+    } catch (err) {
+      console.log(err, "errorr");
+    }
   }
 
   async function onBoardingSumbitHandler() {
+    console.log("first testing");
     const data = {
       address: localStorage.getItem("address"),
     };
+    console.log(data, "first");
 
     onBoarding(data);
   }
@@ -549,13 +569,13 @@ function Login() {
                       </div>
                       <div className="modal-footer" id="connect-footer">
                         <Link href="/dashboard">
-                        <button
-                          type="button"
-                          // onClick={() => getFaceStatusHandler()}
-                          className="connect-wallet"
-                        >
-                          Go to Dashboard
-                        </button>
+                          <button
+                            type="button"
+                            // onClick={() => getFaceStatusHandler()}
+                            className="connect-wallet"
+                          >
+                            Go to Dashboard
+                          </button>
                         </Link>
                       </div>
                     </div>
@@ -1078,7 +1098,6 @@ function Login() {
                       type="number"
                       class="form-control"
                       id="exampleFormControlInput1"
-                      
                       onChange={(e) => handleChangeFn4(e)}
                       ref={num4}
                     />
@@ -1156,7 +1175,11 @@ function Login() {
           className="tron-swap01"
         >
           <Modal2.Body>
-            You are not authorized to Sign in with<strong style={{textTransform:"uppercase"}}> watch only mode</strong>
+            You are not authorized to Sign in with
+            <strong style={{ textTransform: "uppercase" }}>
+              {" "}
+              watch only mode
+            </strong>
           </Modal2.Body>
           <Modal2.Footer>
             <button
@@ -1173,4 +1196,3 @@ function Login() {
   );
 }
 export default dynamic(() => Promise.resolve(Login), { ssr: false });
-

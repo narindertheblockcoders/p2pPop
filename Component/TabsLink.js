@@ -296,7 +296,7 @@ export default function TabsLink() {
     try {
       let res = await axios.post("/api/addOnBoarding", data);
       const response = res.data;
-      console.log(response.data, "addOnBoarding");
+      console.log(response.data, "addOnBoarding"); 
 
       formSubmitHandler();
     } catch (err) {}
